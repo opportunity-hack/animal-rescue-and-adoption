@@ -158,8 +158,8 @@ export default function ResponsiveAnimalCarousel({
                           Notes: {animals[animalIndex].notes || "None"}
                         </p>
                       </div>
-                      <div className="flex justify-between items-center mt-4">
-                        <button className="bg-[#3A4D42] text-wolfwhite px-4 py-2 mt-4 rounded-md font-outfit font-medium">
+                      <div className="flex justify-between items-center">
+                        <button className="bg-[#3A4D42] text-wolfwhite px-4 py-2 rounded-md font-outfit font-medium">
                           <a
                             href="https://form.jotform.com/242855970936168"
                             target="_blank"
@@ -168,13 +168,17 @@ export default function ResponsiveAnimalCarousel({
                             Adoption Form
                           </a>
                         </button>
-                        <button
+                        <motion.button
                           onClick={() => toggleExpand(index)}
-                          className="bg-wolfwhite text-gray-800 rounded-full p-2"
+                          className="bg-wolfwhite text-gray-800 rounded-full p-2 shadow-md"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          animate={{ y: [0, -5, 0] }}
+                          transition={{ repeat: Infinity, duration: 1 }}
                           aria-label="Hide information"
                         >
                           <ChevronDown className="h-4 w-4" />
-                        </button>
+                        </motion.button>
                       </div>
                     </motion.div>
                   )}
