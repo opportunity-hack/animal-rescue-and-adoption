@@ -3,6 +3,11 @@ import { DBConnectionFailure } from '../library/Errors/Database';
 import { Globals } from '../library/Globals/Globals';
 import { ErrorUtils } from '../library/Utilities/ErrorUtils';
 import { LoggerUtils } from '../library/Utilities/LoggerUtils';
+import { User } from './Models/User';
+import { UserRole } from './Models/UserRole';
+import { ToDo } from './Models/ToDo';
+import { Animal } from './Models/Animal';
+import { Behavior } from './Models/Behavior';
 
 export class Database {
   private readonly uri: string;
@@ -21,6 +26,11 @@ export class Database {
       .then((instance) =>
         LoggerUtils.info('Connected to MongoDB: ' + instance.connection.name)
       )
+      .then(() => User)
+      .then(() => UserRole)
+      .then(() => ToDo)
+      .then(() => Animal)
+      .then(() => Behavior)
       .catch((error) => {
         ErrorUtils.throwCustomError(
           error,

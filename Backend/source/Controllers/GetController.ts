@@ -4,7 +4,14 @@ import {
   ServerEvent
 } from '../../library/Interfaces/HandlerController';
 import { ValidRoutes } from '../../server/ValidRoutes';
-import { GetHelloWorld } from '../Handlers/GetHandlers/HelloWorld';
+import { CheckAuth } from '../Handlers/GetHandlers/CheckAuth';
+import { GetAdminUsers } from '../Handlers/GetHandlers/GetAdminUsers';
+import { GetAllAnimals } from '../Handlers/GetHandlers/GetAllAnimals';
+import { GetAnimalById } from '../Handlers/GetHandlers/GetAnimalById';
+import { GetBehaviorById } from '../Handlers/GetHandlers/GetBehaviorById';
+import { GetBehaviorByName } from '../Handlers/GetHandlers/GetBehaviorByName';
+import { GetAllBehaviors } from '../Handlers/GetHandlers/GetBehaviors';
+import { GetToDo } from '../Handlers/GetHandlers/GetToDo';
 
 export class GetController extends Controller<ServerEvent> {
   private routeId: ValidRoutes;
@@ -16,8 +23,22 @@ export class GetController extends Controller<ServerEvent> {
 
   protected resolve(): HandlerController<ServerEvent> | null {
     switch (this.routeId) {
-      case ValidRoutes.HelloWorld:
-        return new GetHelloWorld(this.trigger);
+      case ValidRoutes.CheckAuth:
+        return new CheckAuth(this.trigger);
+      case ValidRoutes.GetToDo:
+        return new GetToDo(this.trigger);
+      case ValidRoutes.GetAdminUsers:
+        return new GetAdminUsers(this.trigger);
+      case ValidRoutes.GetAllAnimals:
+        return new GetAllAnimals(this.trigger);
+      case ValidRoutes.GetAnimalById:
+        return new GetAnimalById(this.trigger);
+      case ValidRoutes.GetBehaviors:
+        return new GetAllBehaviors(this.trigger);
+      case ValidRoutes.GetBehaviorById:
+        return new GetBehaviorById(this.trigger);
+      case ValidRoutes.GetBehaviorByName:
+        return new GetBehaviorByName(this.trigger);
       default:
         return null;
     }
