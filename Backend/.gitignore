@@ -11,9 +11,12 @@ npm-debug.*
 # typescript
 *.tsbuildinfo
 
+pnpm-lock.yaml
+
 # misc 
 test/
 **/.DS_Store
+pnpm-lock.yaml
 
 # Ignore build output directories
 dist/
@@ -27,6 +30,8 @@ build/
 # Ignore log files
 *.log
 Logs/
+
+pnpm-lock.yaml
 
 # Ignore coverage reports
 coverage/
@@ -55,3 +60,4 @@ Thumbs.db
 **/*.*proj.user
 **/*.dbmdl
 **/*.jfm
+pnpm-lock.yaml

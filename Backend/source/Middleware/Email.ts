@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
-import { CouldNotSendEmail } from '../../library/Errors/Email';
+import { CouldNotSendEmail } from '../../library/Errors/External';
 import { Globals } from '../../library/Globals/Globals';
 
 export class Email {

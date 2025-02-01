@@ -15,12 +15,11 @@ export interface IHandler {
 export interface IHasChecks {
   runChecks(): Promise<void>;
 }
-interface IHandlerWithChecks extends IHasChecks, IHandler {}
+export interface IHandlerWithChecks extends IHasChecks, IHandler {}
 
 /**
  * All interactions with the bot defined in ValidEventTypes that have been routed via a Controller must extend Handler so they are automatically processed. Always remember to add \@Catchable above the execute method to catch any errors that may occur.
  * This class implements ICheckable when the decorator Checkable is used on the class.
- * @implements IHandler
  * @template T - A type that extends one of the ValidEventTypes. Can add more types to the ValidEventTypes union type if needed.
  */
 
@@ -35,7 +34,9 @@ export abstract class Handler<T extends ServerEvent> implements IHandler {
 
   abstract execute(): Promise<void>;
 
-  // If true, the handler has checks to run before executing the handler.
+  /**
+   * If true, the handler has checks to run before executing the handler.
+   */
   public hasChecks(): this is IHandlerWithChecks {
     return this.checkable;
   }

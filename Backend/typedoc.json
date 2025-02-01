@@ -1,0 +1,43 @@
+{
+  "entryPoints": [
+    "./index.ts",
+    "./database/**/*.ts",
+    "./server/**/*.ts",
+    "./library/**/*.ts",
+    "./source/**/*.ts"
+  ],
+  "out": "docs",
+  "excludeExternals": true,
+  "categorizeByGroup": true,
+  "categoryOrder": [
+    "Database",
+    "Models",
+    "Services",
+    "Server",
+    "Routes",
+    "Controllers",
+    "Handlers",
+    "Middleware",
+    "Utilities",
+    "Interfaces",
+    "Types",
+    "Errors",
+    "Decorators",
+    "Constants",
+    "*"
+  ],
+  "theme": "hierarchy",
+  "name": "NEWRR Backend",
+  "readme": "README.md",
+  "entryPointStrategy": "expand",
+  "sort": ["static-first", "alphabetical"],
+  "plugin": ["typedoc-theme-hierarchy"],
+  "defaultCategory": "Other",
+  "searchInComments": true,
+  "hideGenerator": true,
+  "disableSources": false,
+  "visibilityFilters": {
+    "inherited": true,
+    "external": false
+  }
+}

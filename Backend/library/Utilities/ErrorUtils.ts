@@ -5,7 +5,12 @@ import {
   DBError,
   DBErrorRes
 } from '../Errors/Database';
-import { CouldNotSendEmail, CouldNotSendEmailRes } from '../Errors/Email';
+import {
+  CouldNotSaveImage,
+  CouldNotSaveImageRes,
+  CouldNotSendEmail,
+  CouldNotSendEmailRes
+} from '../Errors/External';
 import {
   MissingBody,
   MissingBodyRes,
@@ -14,6 +19,44 @@ import {
 } from '../Errors/Params';
 import { ErrorResponse } from '../Interfaces/Errors';
 import { LoggerUtils } from './LoggerUtils';
+import {
+  InvalidCredentials,
+  InvalidCredentialsRes
+} from '../Errors/GoogleAuth';
+import {
+  AnimalDoesNotExist,
+  AnimalDoesNotExistRes,
+  InvalidAnimalData,
+  InvalidAnimalDataRes,
+  InvalidAnimalUpdateData,
+  InvalidAnimalUpdateDataRes,
+  NoAnimalsFound,
+  NoAnimalsFoundRes
+} from '../Errors/Animal';
+import {
+  BehaviorAlreadyExists,
+  BehaviorAlreadyExistsRes,
+  BehaviorDoesNotExist,
+  BehaviorDoesNotExistRes,
+  InvalidBehaviorData,
+  InvalidBehaviorDataRes,
+  NoBehaviorsSaved,
+  NoBehaviorsSavedRes
+} from '../Errors/Behavior';
+import {
+  MissingCookies,
+  MissingCookiesRes,
+  MissingPayload,
+  MissingPayloadRes,
+  MissingToken,
+  MissingTokenRes,
+  MissingUser,
+  MissingUserRes,
+  Unauthorized,
+  UnauthorizedRes,
+  UserNotFound,
+  UserNotFoundRes
+} from '../Errors/Auth';
 
 export type CustomErrorType = new (...args: any[]) => Error;
 
@@ -41,7 +84,23 @@ export class ErrorUtils {
     [
       MissingBody.name,
       (error: MissingBody) => new MissingBodyRes(error.missingBody)
-    ]
+    ],
+    [InvalidCredentials.name, () => new InvalidCredentialsRes()],
+    [Unauthorized.name, () => new UnauthorizedRes()],
+    [AnimalDoesNotExist.name, () => new AnimalDoesNotExistRes()],
+    [NoAnimalsFound.name, () => new NoAnimalsFoundRes()],
+    [NoBehaviorsSaved.name, () => new NoBehaviorsSavedRes()],
+    [BehaviorAlreadyExists.name, () => new BehaviorAlreadyExistsRes()],
+    [MissingCookies.name, () => new MissingCookiesRes()],
+    [MissingToken.name, () => new MissingTokenRes()],
+    [MissingUser.name, () => new MissingUserRes()],
+    [UserNotFound.name, () => new UserNotFoundRes()],
+    [MissingPayload.name, () => new MissingPayloadRes()],
+    [BehaviorDoesNotExist.name, () => new BehaviorDoesNotExistRes()],
+    [CouldNotSaveImage.name, () => new CouldNotSaveImageRes()],
+    [InvalidAnimalData.name, () => new InvalidAnimalDataRes()],
+    [InvalidBehaviorData.name, () => new InvalidBehaviorDataRes()],
+    [InvalidAnimalUpdateData.name, () => new InvalidAnimalUpdateDataRes()]
   ]);
 
   public static getErrorRes(

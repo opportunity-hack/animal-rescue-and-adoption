@@ -1,10 +1,13 @@
-import express, { Application } from 'express';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import express, { Application } from 'express';
+import multer from 'multer';
+import path from 'path';
 import { Globals } from '../library/Globals/Globals';
 import { LoggerUtils } from '../library/Utilities/LoggerUtils';
 import { GetRouter } from './Routes/Get';
-import { HttpStatusCode } from 'axios';
-// Import other routers as needed
+import { PostRouter } from './Routes/Post';
+import { PutRouter } from './Routes/Put';
 
 export class Server {
   private readonly app: Application;
@@ -16,39 +19,44 @@ export class Server {
 
     this.configureMiddleware();
     this.configureRoutes();
-    // this.configureErrorHandling();
   }
 
   private configureMiddleware(): void {
     this.app.use(
       cors({
-        origin: 'http://localhost:3000',
+        origin: [Globals.FRONTEND_URL, Globals.API_URL],
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
         credentials: true
       })
     );
 
+    this.app.options('*', cors());
+    this.app.use(cookieParser());
     this.app.use(express.json());
   }
 
   private configureRoutes(): void {
-    this.app.use('/api', new GetRouter().router);
-  }
+    const storage = multer.memoryStorage();
+    const upload = multer({ storage: storage });
 
-  private configureErrorHandling(): void {
+    this.app.use('/api', new GetRouter().router);
+    this.app.use('/api', upload.any(), new PostRouter().router);
+    this.app.use('/api', new PutRouter().router);
+
     this.app.use(
-      (
-        err: any,
-        req: express.Request,
-        res: express.Response,
-        next: express.NextFunction
-      ) => {
-        LoggerUtils.error(`Error: ${err}`);
-        res
-          .status(HttpStatusCode.InternalServerError)
-          .json({ message: 'Internal Server Error' });
-      }
+      '/docs',
+      express.static(path.join(__dirname, '../docs'), {
+        setHeaders: (res, path) => {
+          if (path.endsWith('.html')) {
+            res.setHeader('Content-Type', 'text/html');
+          } else if (path.endsWith('.css')) {
+            res.setHeader('Content-Type', 'text/css');
+          } else if (path.endsWith('.js')) {
+            res.setHeader('Content-Type', 'application/javascript');
+          }
+        }
+      })
     );
   }
 

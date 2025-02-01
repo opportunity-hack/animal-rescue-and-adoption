@@ -4,7 +4,7 @@
   "parserOptions": {
     "project": "./tsconfig.json",
     "sourceType": "module",
-    "ecmaVersion": "latest"
+    "ecmaVersion": 2020
   },
   "extends": [
     "eslint:recommended",
@@ -20,7 +20,7 @@
   },
   "env": {
     "commonjs": true,
-    "es2022": true,
+    "es2021": true,
     "node": true
   }
 }
