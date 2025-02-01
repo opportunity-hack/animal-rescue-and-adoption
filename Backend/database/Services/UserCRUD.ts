@@ -10,7 +10,8 @@ export class UserCRUD {
   public static async createUser(user: Omit<IUser, '_id'>): Promise<IUser> {
     const newUser = await User.create(user);
     const populatedUser = await newUser.populate('role');
-    return populatedUser.toObject();
+    // Explicitly cast the plain object to IUser
+    return populatedUser.toObject() as IUser;
   }
 
   @DBCatchable('Error fetching user by Google ID')
@@ -18,13 +19,14 @@ export class UserCRUD {
     google_id: string
   ): Promise<IUser | null> {
     const user = await User.findOne({ google_id }).populate('role').lean();
-    return user;
+    // You can also cast here if needed:
+    return user as IUser | null;
   }
 
   @DBCatchable('Error fetching user by ID')
   public static async getUserById(id: string): Promise<IUser | null> {
     const user = await User.findById(id).populate('role').lean();
-    return user;
+    return user as IUser | null;
   }
 
   @DBCatchable('Error fetching user by ID')
@@ -47,7 +49,7 @@ export class UserCRUD {
       throw new Error('User not found');
     }
 
-    return updatedUser.toObject();
+    return updatedUser.toObject() as IUser;
   }
 
   @DBCatchable('Error fetching admin users')
@@ -64,6 +66,6 @@ export class UserCRUD {
       'role'
     );
 
-    return adminUsers;
+    return adminUsers.map((user) => user.toObject() as IUser);
   }
 }
