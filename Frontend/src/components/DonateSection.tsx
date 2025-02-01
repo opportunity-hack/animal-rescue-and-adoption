@@ -25,8 +25,14 @@ const DonateSection = () => {
             </a>
           </button>
         </div>
-        <div className='w-[450px]'>
-          <givebutter-widget id="jDJPKg" height='auto' width='450px'></givebutter-widget>
+        <div className="flex items-center justify-center w-full">
+          <div className="sm:pl-16 w-full">
+            <givebutter-widget
+              id="jDJPKg"
+              height="auto"
+              style={{ width: "100%" }}
+            ></givebutter-widget>
+          </div>
         </div>
       </div>
     </section>
