@@ -1,0 +1,8 @@
+{
+  "name": "@monorepo/api",
+  "private": true,
+  "scripts": {},
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}

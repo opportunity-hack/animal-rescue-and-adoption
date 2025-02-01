@@ -1,0 +1,23 @@
+{
+  "watch": ["source", "test", "database", "library", "server", "components"],
+  "ignore": [
+    "Dockerfile.dev",
+    "Dockerfile.prod",
+    "compose.yaml",
+    "package.json",
+    "pnpm-lock.yaml",
+    "tsconfig.json",
+    "node_modules",
+    ".eslintrc",
+    ".prettierrc",
+    ".gitignore",
+    ".prettierignore",
+    ".eslintignore",
+    ",dockerignore",
+    ".env.development",
+    ".env.production"
+  ],
+  "ext": "js,ts,json",
+  "exec": "ts-node index.ts",
+  "delay": "4000"
+}

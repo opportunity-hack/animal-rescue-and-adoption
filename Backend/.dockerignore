@@ -1,0 +1,60 @@
+# Ignore node modules
+node_modules
+
+# Ignore TypeScript build output
+dist
+
+# Ignore temporary files
+test/
+
+# Ignore pnpm lock file
+pnpm-lock.yaml
+
+# Ignore misc
+**/.DS_Store
+
+# Ignore Eclipse project files
+**/.classpath
+**/.dockerignore
+# **/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+**/*.*proj.user
+**/*.dbmdl
+**/*.jfm
+
+# Ignore Helm charts
+**/charts
+
+# Ignore Docker Compose files
+**/docker-compose*
+**/compose*
+
+# Ignore Dockerfiles
+**/Dockerfile*
+
+# Ignore node modules (redundant)
+**/node_modules
+
+# Ignore npm debug logs
+**/npm-debug.log
+
+# Ignore build output directories
+**/obj
+
+# Ignore development secrets
+**/secrets.dev.yaml
+
+# Ignore development values
+**/values.dev.yaml
+
+# Ignore license file
+LICENSE
+
+# Ignore readme file
+README.md
