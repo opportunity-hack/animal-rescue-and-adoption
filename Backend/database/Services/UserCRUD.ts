@@ -28,6 +28,46 @@ export class UserCRUD {
   }
 
   @DBCatchable('Error fetching user by ID')
+  public static async addVolunteerUser(email: string): Promise<IUser | null> {
+    const volunteerRole = await UserRole.findOne({
+      name: DefaultRoles.Volunteer
+    }).lean();
+
+    if (!volunteerRole) {
+      throw new RoleNotFound('Volunteer role not found');
+    }
+
+    const updatedUser = await User.findOneAndUpdate(
+      { email },
+      { role: volunteerRole._id },
+      { new: true, runValidators: true }
+    ).populate('role');
+
+    if (!updatedUser) {
+      throw new Error('User not found');
+    }
+
+    return updatedUser.toObject() as IUser;
+  }
+
+  @DBCatchable('Error fetching volunteer users')
+  public static async getVolunteerUsers(): Promise<IUser[]> {
+    const volunteerRole = await UserRole.findOne({
+      name: DefaultRoles.Volunteer
+    });
+
+    if (!volunteerRole) {
+      return [];
+    }
+
+    const volunteerUsers = await User.find({
+      role: volunteerRole._id
+    }).populate('role');
+
+    return volunteerUsers.map((user) => user.toObject() as IUser);
+  }
+
+  @DBCatchable('Error fetching user by ID')
   public static async addAdminUser(email: string): Promise<IUser | null> {
     const adminRole = await UserRole.findOne({
       name: DefaultRoles.Admin
