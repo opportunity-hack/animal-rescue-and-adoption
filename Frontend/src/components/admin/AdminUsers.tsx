@@ -26,7 +26,7 @@ const AdminUsers: React.FC = () => {
 
     try {
       await axios.post(
-        `${import.meta.env.VITE_G_API_URL}/add-admin-user`,
+        `${import.meta.env.VITE_G_API_URL}/add/admin`,
         { email },
         { withCredentials: true }
       );
