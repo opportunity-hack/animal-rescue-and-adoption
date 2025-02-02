@@ -110,7 +110,7 @@ export class UserCRUD {
   @DBCatchable('Error fetching admin users')
   public static async getAdminUsers(): Promise<IUser[]> {
     const adminRole = await UserRole.findOne({
-      perm_level: { $gte: 10 }
+      name: DefaultRoles.Admin
     });
 
     if (!adminRole) {
