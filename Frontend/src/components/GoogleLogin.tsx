@@ -26,11 +26,11 @@ function CustomGoogleLogin() {
       credential: string,
       client_id: string
     ) => {
-        await axios.post<GoogleAuthResponse>(
-            `${import.meta.env.VITE_G_API_URL}/google-auth`,
-            { credential, client_id },
-            { withCredentials: true }
-        );
+      await axios.post<GoogleAuthResponse>(
+        `${import.meta.env.VITE_G_API_URL}/google-auth`,
+        { credential, client_id },
+        { withCredentials: true }
+      );
 
       // Invalidate and refetch user query
       await queryClient.invalidateQueries({ queryKey: ["user"] });
@@ -39,7 +39,7 @@ function CustomGoogleLogin() {
       //setProfile({email, name, picture, authenticated: role.perm_level > 5});
       await setTimeout(() => {
         //navigate("/admin/dashboard");
-      }, 10000)
+      }, 10000);
     };
 
     try {

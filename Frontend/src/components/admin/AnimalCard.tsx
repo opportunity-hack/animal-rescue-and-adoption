@@ -33,8 +33,8 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
 
   const handleSave = async () => {
     try {
-       // Assuming you have a method to update the animal
-       const response = await axios.put<IAnimalData>(
+      // Assuming you have a method to update the animal
+      const response = await axios.put<IAnimalData>(
         `${import.meta.env.VITE_G_API_URL}/animal`,
         formattedAnimal,
         {
@@ -76,12 +76,16 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
     >
       {/* Status badge in the top right corner */}
       <span
-        className={`absolute top-2 right-2 px-2 py-1 rounded-full text-black text-sm ${getStatusColor(animal.status)}`}
+        className={`absolute top-2 right-2 px-2 py-1 rounded-full text-black text-sm ${getStatusColor(
+          animal.status
+        )}`}
       >
         {animal.status}
       </span>
       <div
-        className={`flex justify-between items-center ${expanded ? "mb-4" : ""}`}
+        className={`flex justify-between items-center ${
+          expanded ? "mb-4" : ""
+        }`}
       >
         <div className="flex items-center">
           <button

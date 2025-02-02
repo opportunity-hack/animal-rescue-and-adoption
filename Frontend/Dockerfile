@@ -1,7 +1,7 @@
 # Stage 1: Build the Frontend
 FROM node:22-alpine AS builder
 
-ARG API_URL
+ARG VITE_G_API_URL
 ARG RAILWAY_ENVIRONMENT
 ARG RAILWAY_SERVICE_NAME
 

@@ -23,14 +23,13 @@ const Users: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    
 
     try {
       await axios.post(
         `${import.meta.env.VITE_G_API_URL}/add-admin-user`,
         { email },
         { withCredentials: true }
-      );;
+      );
       setEmail("");
       await fetchUsers();
     } catch (error) {
