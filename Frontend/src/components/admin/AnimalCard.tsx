@@ -6,10 +6,14 @@ import { AnimalValidator } from "../../Validators/Animal";
 import { paramToTitleCase } from "../../helpers/ConvertCases";
 import { ZodError } from "zod";
 
-const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
+const AnimalCard: React.FC<{ animal: IAnimalData }> = ({
+  animal: initialAnimal,
+}) => {
   const [expanded, setExpanded] = useState(false);
   const [editing, setEditing] = useState(false);
-  const [editedAnimal, setEditedAnimal] = useState<IAnimalData>(animal);
+  const [animal, setAnimal] = useState<IAnimalData>(initialAnimal);
+  const [editedAnimal, setEditedAnimal] = useState<IAnimalData>(initialAnimal);
+  const [saveMessageVisible, setSaveMessageVisible] = useState(false);
 
   // Function to get status color
   const getStatusColor = (status: AnimalStatus): string => {
@@ -50,9 +54,14 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
           withCredentials: true,
         }
       );
-      // Update the local state with the updated animal
+      // Update both the local state and the edited state with the updated animal
+      setAnimal(response.data);
       setEditedAnimal(response.data);
       setEditing(false);
+
+      // Show the "Saved!" message
+      setSaveMessageVisible(true);
+      setTimeout(() => setSaveMessageVisible(false), 3000);
     } catch (error) {
       if (error instanceof ZodError) {
         console.error("Validation error:", error.errors);
@@ -67,6 +76,14 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
   ) => {
     const { name, value } = e.target;
     setEditedAnimal((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+    setEditedAnimal((prev) => ({
+      ...prev,
+      status: value as AnimalStatus,
+    }));
   };
 
   const renderDetail = (label: string, value: string | number | undefined) => {
@@ -108,70 +125,120 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
             </p>
           </div>
         </div>
-        {/* Status badge moved here to align with the expand/collapse button */}
-        <span
-          className={`flex justify-center px-2 py-2 rounded-lg text-white text-sm ${getStatusColor(
-            animal.status
-          )}`}
-        >
-          {paramToTitleCase(animal.status)}
-        </span>
+        {editing ? (
+          <select
+            name="status"
+            value={editedAnimal.status}
+            onChange={handleStatusChange}
+            className={`flex justify-center px-2 py-2 rounded-lg text-white text-md font-['outfit'] ${getStatusColor(
+              editedAnimal.status
+            )}`}
+          >
+            {Object.values(AnimalStatus).map((status) => (
+              <option
+                key={status}
+                value={status}
+                className={getStatusColor(status)}
+              >
+                {paramToTitleCase(status)}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <span
+            className={`flex justify-center px-2 py-2 rounded-lg text-white text-md font-['outfit'] ${getStatusColor(
+              animal.status
+            )}`}
+          >
+            {paramToTitleCase(animal.status)}
+          </span>
+        )}
       </div>
       {expanded && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             {editing ? (
               <>
-                <input
-                  name="name"
-                  value={editedAnimal.name}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="species"
-                  value={editedAnimal.species}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="age"
-                  type="number"
-                  value={editedAnimal.age || ""}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="breed"
-                  value={editedAnimal.breed || ""}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="weight"
-                  type="number"
-                  value={editedAnimal.weight || ""}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
-                />
-                <input
-                  name="location"
-                  value={editedAnimal.location || ""}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
-                />
-                <textarea
-                  name="medicalInfo"
-                  value={editedAnimal.medicalInfo || ""}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
-                />
-                <textarea
-                  name="notes"
-                  value={editedAnimal.notes || ""}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border rounded"
-                />
+                <label className="block">
+                  <span className="text-gray-700">Name</span>
+                  <input
+                    name="name"
+                    value={editedAnimal.name}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border rounded mt-1 font-['outfit']"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-gray-700">Species</span>
+                  <input
+                    name="species"
+                    value={editedAnimal.species}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border rounded mt-1 font-['outfit']"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-gray-700 font-['outfit']">Age</span>
+                  <input
+                    name="age"
+                    type="number"
+                    value={editedAnimal.age || ""}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border rounded mt-1 font-['outfit']"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-gray-700 font-['outfit']">Breed</span>
+                  <input
+                    name="breed"
+                    value={editedAnimal.breed || ""}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border rounded mt-1 font-['outfit']"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-gray-700 font-['outfit']">
+                    Weight (kg)
+                  </span>
+                  <input
+                    name="weight"
+                    type="number"
+                    value={editedAnimal.weight || ""}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border rounded mt-1 font-['outfit']"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-gray-700 font-['outfit']">
+                    Location
+                  </span>
+                  <input
+                    name="location"
+                    value={editedAnimal.location || ""}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border rounded mt-1 font-['outfit']"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-gray-700 font-['outfit']">
+                    Medical Info
+                  </span>
+                  <textarea
+                    name="medicalInfo"
+                    value={editedAnimal.medicalInfo || ""}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border rounded mt-1 font-['outfit']"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-gray-700 font-['outfit']">Notes</span>
+                  <textarea
+                    name="notes"
+                    value={editedAnimal.notes || ""}
+                    onChange={handleInputChange}
+                    className="w-full p-2 border rounded mt-1 font-['outfit']"
+                  />
+                </label>
               </>
             ) : (
               <>
@@ -218,19 +285,36 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
         <div className="flex space-x-2">
           {expanded &&
             (editing ? (
-              <button
-                onClick={handleSave}
-                className="bg-green-500 text-white px-3 py-1 rounded"
-              >
-                Save
-              </button>
+              <>
+                <button
+                  onClick={handleSave}
+                  className="bg-green-500 text-white px-3 py-1 rounded font-['outfit']"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => setExpanded(false)}
+                  className="bg-red-500 text-white px-3 py-1 rounded font-['outfit']"
+                >
+                  Close
+                </button>
+              </>
             ) : (
-              <button
-                onClick={handleEdit}
-                className="bg-blue-500 text-white px-3 py-1 rounded"
-              >
-                Edit
-              </button>
+              <div className="flex items-center">
+                <button
+                  onClick={handleEdit}
+                  className="bg-blue-500 text-white px-3 py-1 rounded font-['outfit']"
+                >
+                  Edit
+                </button>
+                <span
+                  className={`ml-2 text-green-500 transition-opacity duration-500 font-['outfit'] ${
+                    saveMessageVisible ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  Saved!
+                </span>
+              </div>
             ))}
         </div>
       </div>
