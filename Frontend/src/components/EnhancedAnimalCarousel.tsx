@@ -82,10 +82,10 @@ export default function ResponsiveAnimalCarousel({
               <div className="relative">
                 <motion.div transition={{ type: "spring", stiffness: 300 }}>
                   <img
-                    // src={animals[animalIndex].images[0]} // Use the first image from the images array
-                    src={
-                      "https://pbs.twimg.com/media/F2GWbheXYAAV2_a.jpg:large"
-                    }
+                    src={animals[animalIndex].images[0]} // Use the first image from the images array
+                    // src={
+                    //   "https://pbs.twimg.com/media/F2GWbheXYAAV2_a.jpg:large"
+                    // }
                     alt={animals[animalIndex].name}
                     className={`w-full h-[300px] sm:h-[350px] lg:h-[400px] object-cover ${
                       expandedIndex === index ? "blur-sm" : ""
