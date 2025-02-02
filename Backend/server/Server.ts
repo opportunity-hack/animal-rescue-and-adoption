@@ -23,13 +23,13 @@ export class Server {
   }
 
   private configureMiddleware(): void {
-    this.app.use((req: Request, res: Response, next: NextFunction) => {
-      res.cookie('cookieName', 'cookieValue', {
-        secure: process.env.NODE_ENV === 'production',
-        httpOnly: true,
-        sameSite: 'none'
-      });
-    });
+    // this.app.use((req: Request, res: Response, next: NextFunction) => {
+    //   res.cookie('cookieName', 'cookieValue', {
+    //     secure: process.env.NODE_ENV === 'production',
+    //     httpOnly: true,
+    //     sameSite: 'none'
+    //   });
+    // });
 
     this.app.use(cookieParser());
     this.app.use(bodyParser.urlencoded());
