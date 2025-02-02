@@ -15,8 +15,6 @@ export class GetVolunteerUsers extends Handler<ServerEvent> {
   async execute(): Promise<void> {
     const volunteerUsers = await UserCRUD.getVolunteerUsers();
 
-    console.log(volunteerUsers);
-
     this.event.res.status(HttpStatusCode.Ok).json(volunteerUsers);
   }
 }
