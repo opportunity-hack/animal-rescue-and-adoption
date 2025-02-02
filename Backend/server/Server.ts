@@ -22,16 +22,30 @@ export class Server {
   }
 
   private configureMiddleware(): void {
+    const whitelist = [
+      Globals.FRONTEND_URL,
+      'http://localhost:3000',
+      Globals.API_URL
+    ];
+
     this.app.use(
       cors({
-        origin: [Globals.FRONTEND_URL, Globals.API_URL],
+        origin: '*',
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
         credentials: true
       })
     );
 
-    this.app.options('*', cors());
+    this.app.options(
+      '*',
+      cors({
+        origin: '*',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+        credentials: true
+      })
+    );
     this.app.use(cookieParser());
     this.app.use(express.json());
   }
