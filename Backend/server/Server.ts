@@ -23,27 +23,13 @@ export class Server {
   }
 
   private configureMiddleware(): void {
-    // CORS middleware
-    // const allowCrossDomain = (
-    //   req: Request,
-    //   res: Response,
-    //   next: NextFunction
-    // ) => {
-    //   res.header(`Access-Control-Allow-Origin`, [
-    //     Globals.FRONTEND_URL,
-    //     Globals.API_URL
-    //   ]);
-    //   res.header(`Access-Control-Allow-Methods`, [
-    //     'GET',
-    //     'PUT',
-    //     'POST',
-    //     'DELETE'
-    //   ]);
-    //   res.header(`Access-Control-Allow-Headers`, `Content-Type`);
-    //   next();
-    // };
-
-    // this.app.use(allowCrossDomain);
+    this.app.use((req: Request, res: Response, next: NextFunction) => {
+      res.cookie('cookieName', 'cookieValue', {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        sameSite: 'none'
+      });
+    });
 
     this.app.use(cookieParser());
     this.app.use(bodyParser.urlencoded());
