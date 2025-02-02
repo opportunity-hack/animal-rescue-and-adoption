@@ -48,7 +48,7 @@ export class Server {
     this.app.use(cookieParser());
     this.app.use(bodyParser.urlencoded());
     this.app.use(express.json());
-    this.app.use(cors());
+    this.app.use(cors({ credentials: true, origin: true }));
   }
 
   private configureRoutes(): void {
