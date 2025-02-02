@@ -10,7 +10,7 @@ const VolunteerUsers: React.FC = () => {
 
   const fetchUsers = async () => {
     const response = await axios.get<UserDetails[]>(
-      `${import.meta.env.VITE_G_API_URL}/get-admin-users`,
+      `${import.meta.env.VITE_G_API_URL}/get-volunteer-users`,
       { withCredentials: true }
     );
     const users = response.data;
@@ -26,7 +26,7 @@ const VolunteerUsers: React.FC = () => {
 
     try {
       await axios.post(
-        `${import.meta.env.VITE_G_API_URL}/add-admin-user`,
+        `${import.meta.env.VITE_G_API_URL}/add-volunteer-user`,
         { email },
         { withCredentials: true }
       );
@@ -53,7 +53,7 @@ const VolunteerUsers: React.FC = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="bg-white/10 p-2 rounded-md flex-grow w-full md:w-auto"
-            placeholder="Add new admin email"
+            placeholder="Add new volunteer email"
             required
           />
           <button
