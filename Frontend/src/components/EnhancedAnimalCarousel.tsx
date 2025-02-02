@@ -158,7 +158,7 @@ export default function ResponsiveAnimalCarousel({
                         </p>
                       </div>
                       <div className="flex justify-between items-center">
-                        <button className="bg-[#3A4D42] text-wolfwhite px-4 py-2 rounded-md font-outfit font-medium">
+                        <button className="bg-[#3A4D42] text-wolfwhite px-4 py-2 rounded-md font-outfit font-medium text-xs md:text-base">
                           <a
                             href="https://form.jotform.com/242855970936168"
                             target="_blank"

@@ -4,7 +4,7 @@ import { Plus, User, Mail, Shield } from "lucide-react";
 import { UserDetails } from "../../interfaces/User";
 import axios from "axios";
 
-const Users: React.FC = () => {
+const AdminUsers: React.FC = () => {
   const [users, setUsers] = useState<UserDetails[]>([]);
   const [email, setEmail] = useState<string>("");
 
@@ -43,7 +43,7 @@ const Users: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-darkergreen text-white p-6 px-4 md:px-6 rounded-lg shadow-lg m-8"
+      className="bg-darkergreen text-white p-6 px-4 md:px-6 rounded-lg shadow-lg m-8 w-full"
     >
       <h2 className="text-2xl font-bold mb-4">Admin Users</h2>
       <form onSubmit={handleSubmit} className="mb-6">
@@ -93,4 +93,4 @@ const Users: React.FC = () => {
   );
 };
 
-export default Users;
+export default AdminUsers;
