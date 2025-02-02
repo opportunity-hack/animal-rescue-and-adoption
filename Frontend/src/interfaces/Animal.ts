@@ -10,10 +10,10 @@ export enum AnimalSex {
 
 export enum AnimalStatus {
   ADOPTED = "adopted",
-  IN_REHABILITATION = "in rehabilitation",
+  IN_REHABILITATION = "in-rehabilitation",
   REHABILITATED = "rehabilitated",
   RELEASED = "released",
-  NO_STATUS = "no status",
+  NO_STATUS = "no-status",
 }
 
 /*

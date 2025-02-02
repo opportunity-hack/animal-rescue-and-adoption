@@ -1,5 +1,5 @@
 export enum DefaultRoles {
-    Basic = 'basic',
-    Volunteer = 'volunteer',
-    Admin = 'admin'
+  Basic = "basic",
+  Volunteer = "volunteer",
+  Admin = "admin",
 }
