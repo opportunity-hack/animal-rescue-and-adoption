@@ -4,17 +4,19 @@ import { AnimalSex, AnimalStatus } from '../Types/Animal';
 export class AnimalValidator {
   public static Behavior = z.object({
     _id: z.string(),
-    name: z.string(),
+    name: z.string()
   });
 
   public static NewBehavior = this.Behavior.pick({
-    name: true,
+    name: true
   });
 
   public static BaseAnimal = z.object({
     _id: z.string(),
-    intakeDate: z.number(),
+    intakeDate: z.number()
   });
+
+  private static ToNumber = z.string().pipe(z.coerce.number());
 
   public static AnimalData = z
     .object({
@@ -24,31 +26,31 @@ export class AnimalValidator {
       status: z.nativeEnum(AnimalStatus),
       images: z.array(z.string().url()),
       behaviors: z.array(AnimalValidator.Behavior),
-      age: z.number().optional(),
+      age: z.number().or(this.ToNumber).optional(),
       breed: z.string().optional(),
       medicalInfo: z.string().optional(),
       location: z.string().optional(),
       notes: z.string().optional(),
-      weight: z.number().optional(),
+      weight: z.number().or(this.ToNumber).optional()
     })
     .merge(AnimalValidator.BaseAnimal);
 
   public static UpdateableAnimalKeysAsString = Object.keys(
     this.AnimalData.omit({
       _id: true,
-      intakeDate: true,
+      intakeDate: true
     }).shape
   );
 
   public static UpdateableAnimalKeys = AnimalValidator.AnimalData.omit({
     _id: true,
-    intakeDate: true,
+    intakeDate: true
   })
     .partial()
     .refine(
       (data) => Object.values(data).some((value) => value !== undefined),
       {
-        message: 'At least one updateable key must be provided',
+        message: 'At least one updateable key must be provided'
       }
     );
 
@@ -56,6 +58,6 @@ export class AnimalValidator {
     name: z.string(),
     species: z.string(),
     sex: z.nativeEnum(AnimalSex),
-    images: z.array(z.string().url()),
+    images: z.array(z.string().url())
   });
 }

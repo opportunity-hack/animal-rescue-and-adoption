@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { ValidRoutes } from '../../server/ValidRoutes';
+import { LoggerUtils } from '../Utilities/LoggerUtils';
 
 export type ServerEvent = {
   req: Request;
@@ -75,6 +76,7 @@ export abstract class Controller<T extends ValidEventTypes> {
    */
   public async process(): Promise<void> {
     const resolvedHC = this.resolve();
+    LoggerUtils.info(`Processing ${this.trigger.route}`);
 
     if (resolvedHC instanceof Handler) {
       if (resolvedHC.hasChecks()) {
