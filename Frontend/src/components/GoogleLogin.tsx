@@ -20,7 +20,9 @@ function CustomGoogleLogin() {
 
   // if user logins, we need to decode the credential to get their profile
   useEffect(() => {
-    if (!user?.credential || !user.clientId) return;
+    console.log(import.meta.env.VITE_G_CLIENT_ID);
+
+    if (!user?.credential || !user?.clientId) return;
 
     const sendLoginDataToBackend = async (
       credential: string,
@@ -54,7 +56,7 @@ function CustomGoogleLogin() {
 
       //Send data to backend for validation and role access
       console.log("Profile set... Sending to backend");
-      sendLoginDataToBackend(user.credential, user.clientId);
+      sendLoginDataToBackend(user.credential, import.meta.env.VITE_G_CLIENT_ID);
 
       console.log("Sent to backend");
     } catch (error) {
