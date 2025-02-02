@@ -67,6 +67,23 @@ export class UserCRUD {
     return volunteerUsers.map((user) => user.toObject() as IUser);
   }
 
+  @DBCatchable('Error removing volunteer user')
+  public static async removeVolunteerUser(
+    email: string
+  ): Promise<IUser | null> {
+    const volunteer = await User.findOne({
+      email
+    });
+
+    if (!volunteer) {
+      return null;
+    }
+
+    await volunteer.deleteOne({ new: false });
+
+    return volunteer.toObject() as IUser;
+  }
+
   @DBCatchable('Error adding admin user')
   public static async addAdminUser(email: string): Promise<IUser | null> {
     const adminRole = await UserRole.findOne({

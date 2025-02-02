@@ -8,6 +8,7 @@ export enum ValidRoutes {
   AddAdminUser = 'add-admin-user',
   GetVolunteerUsers = 'get-volunteer-users',
   AddVolunteerUser = 'add-volunteer-user',
+  RemoveVolunteerUser = 'remove-volunteer-user',
 
   JotformCheckin = 'jotform-checkin', // POST WEBHOOK
 
