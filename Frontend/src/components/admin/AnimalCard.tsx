@@ -4,17 +4,15 @@ import axios from "axios";
 import { AnimalStatus, IAnimalData } from "../../interfaces/Animal";
 import { AnimalValidator } from "../../Validators/Animal";
 import { paramToTitleCase } from "../../helpers/ConvertCases";
+import { ZodError } from "zod";
 
 const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
   const [expanded, setExpanded] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editedAnimal, setEditedAnimal] = useState<IAnimalData>(animal);
-  const formattedAnimal =
-    AnimalValidator.UpdateableAnimalKeys.safeParse(editedAnimal).data;
-  console.log(formattedAnimal);
+
   // Function to get status color
   const getStatusColor = (status: AnimalStatus): string => {
-    console.log(status);
     switch (status) {
       case AnimalStatus.ADOPTED:
         return "bg-green-500";
@@ -35,10 +33,16 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
 
   const handleSave = async () => {
     try {
-      // Assuming you have a method to update the animal
+      // Validate the animal data only when saving
+      const validatedAnimal =
+        AnimalValidator.UpdateableAnimalKeys.parse(editedAnimal);
+
+      // Log the validatedAnimal to check its content
+      console.log("Validated Animal Data:", validatedAnimal);
+
       const response = await axios.put<IAnimalData>(
-        `${import.meta.env.VITE_G_API_URL}/put-animal-by-id`,
-        formattedAnimal,
+        `${import.meta.env.VITE_G_API_URL}/put/animal`,
+        validatedAnimal,
         {
           headers: {
             id: editedAnimal._id,
@@ -50,7 +54,11 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
       setEditedAnimal(response.data);
       setEditing(false);
     } catch (error) {
-      console.error("Error saving animal data:", error);
+      if (error instanceof ZodError) {
+        console.error("Validation error:", error.errors);
+      } else {
+        console.error("Error saving animal data:", error);
+      }
     }
   };
 
