@@ -10,7 +10,7 @@ const AdminUsers: React.FC = () => {
 
   const fetchUsers = async () => {
     const response = await axios.get<UserDetails[]>(
-      `${import.meta.env.VITE_G_API_URL}/get-admin-users`,
+      `${import.meta.env.VITE_G_API_URL}/get/admins`,
       { withCredentials: true }
     );
     const users = response.data;

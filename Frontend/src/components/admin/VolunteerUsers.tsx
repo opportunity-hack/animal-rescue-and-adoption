@@ -10,7 +10,7 @@ const VolunteerUsers: React.FC = () => {
 
   const fetchUsers = async () => {
     const response = await axios.get<UserDetails[]>(
-      `${import.meta.env.VITE_G_API_URL}/get-volunteer-users`,
+      `${import.meta.env.VITE_G_API_URL}/get/volunteers`,
       { withCredentials: true }
     );
     const users = response.data;
@@ -26,10 +26,11 @@ const VolunteerUsers: React.FC = () => {
 
     try {
       await axios.post(
-        `${import.meta.env.VITE_G_API_URL}/add-volunteer-user`,
+        `${import.meta.env.VITE_G_API_URL}/add/volunteer`,
         { email },
         { withCredentials: true }
       );
+
       setEmail("");
       await fetchUsers();
     } catch (error) {

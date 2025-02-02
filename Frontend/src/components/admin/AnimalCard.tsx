@@ -282,7 +282,7 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({
         </div>
       )}
       <div className="flex justify-between items-center mt-4">
-        <div className="flex space-x-2">
+        <div className="flex spsace-x-2">
           {expanded &&
             (editing ? (
               <>
@@ -294,7 +294,7 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({
                 </button>
                 <button
                   onClick={() => setExpanded(false)}
-                  className="bg-red-500 text-white px-3 py-1 rounded font-['outfit']"
+                  className="bg-red-500 text-white ml-2 px-3 py-1 rounded font-['outfit']"
                 >
                   Close
                 </button>
