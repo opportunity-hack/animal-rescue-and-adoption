@@ -11,6 +11,7 @@ import { ToDo } from '../Handlers/PostHandlers/Todo';
 import { CreateAnimal } from '../Handlers/PostHandlers/CreateAnimal';
 import { CreateBehavior } from '../Handlers/PostHandlers/CreateBehavior';
 import { Jotform } from '../Handlers/PostHandlers/Jotform';
+import { AddVolunteerUser } from '../Handlers/PostHandlers/AddVolunteerUser';
 
 export class PostController extends Controller<ServerEvent> {
   private routeId: ValidRoutes;
@@ -30,6 +31,8 @@ export class PostController extends Controller<ServerEvent> {
         return new ToDo(this.trigger);
       case ValidRoutes.AddAdminUser:
         return new AddAdminUser(this.trigger);
+      case ValidRoutes.AddVolunteerUser:
+        return new AddVolunteerUser(this.trigger);
       case ValidRoutes.CreateAnimal:
         return new CreateAnimal(this.trigger);
       case ValidRoutes.CreateBehavior:

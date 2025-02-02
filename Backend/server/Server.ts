@@ -9,6 +9,7 @@ import { GetRouter } from './Routes/Get';
 import { PostRouter } from './Routes/Post';
 import { PutRouter } from './Routes/Put';
 import bodyParser from 'body-parser';
+import { DeleteRouter } from './Routes/Delete';
 
 export class Server {
   private readonly app: Application;
@@ -36,6 +37,7 @@ export class Server {
     this.app.use('/api', new GetRouter().router);
     this.app.use('/api', upload.any(), new PostRouter().router);
     this.app.use('/api', new PutRouter().router);
+    this.app.use('/api', new DeleteRouter().router);
 
     this.app.use(
       '/docs',

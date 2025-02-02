@@ -20,11 +20,11 @@ export class PostRouter extends RequestRouter {
       this.handleRequest(ValidRoutes.Todo, req, res, true);
     });
 
-    this.router.post('/add-admin-user', (req, res) => {
+    this.router.post('/add/admin', (req, res) => {
       this.handleRequest(ValidRoutes.AddAdminUser, req, res, true);
     });
 
-    this.router.post('/add-volunteer-user', (req, res) => {
+    this.router.post('/add/volunteer', (req, res) => {
       this.handleRequest(ValidRoutes.AddVolunteerUser, req, res, true);
     });
 
