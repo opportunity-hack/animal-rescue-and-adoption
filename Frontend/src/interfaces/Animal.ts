@@ -26,7 +26,6 @@ export interface IBaseAnimal
 export interface IAnimalData
   extends z.infer<typeof AnimalValidator.AnimalData> {}
 
-
 export type NewAnimalData = z.infer<typeof AnimalValidator.NewAnimalData>;
 
 export type UpdateableAnimalKeys = AtLeastOne<

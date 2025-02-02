@@ -10,7 +10,7 @@ export function Root() {
 
   return (
     <StrictMode>
-      <GoogleOAuthProvider clientId={import.meta.env.CLIENT_ID}>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_G_CLIENT_ID}>
         <QueryClientProvider client={queryClient}>
           <App />
         </QueryClientProvider>
