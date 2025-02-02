@@ -98,7 +98,7 @@ export default function ResponsiveAnimalCarousel({
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className="absolute bottom-6 left-6 right-6 flex justify-between items-center"
+                      className="absolute bottom-4 left-4 right-6 flex justify-between items-center"
                     >
                       <div className="bg-black bg-opacity-50 text-wolfwhite px-3 py-1 rounded-lg">
                         <p className="text-md font-semibold">
@@ -111,7 +111,6 @@ export default function ResponsiveAnimalCarousel({
                       <motion.button
                         onClick={() => toggleExpand(index)}
                         className="bg-wolfwhite text-gray-800 rounded-full p-2 shadow-md"
-                        whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                         animate={{ y: [0, -5, 0] }}
                         transition={{ repeat: Infinity, duration: 1 }}
@@ -171,7 +170,6 @@ export default function ResponsiveAnimalCarousel({
                         <motion.button
                           onClick={() => toggleExpand(index)}
                           className="bg-wolfwhite text-gray-800 rounded-full p-2 shadow-md"
-                          whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                           animate={{ y: [0, -5, 0] }}
                           transition={{ repeat: Infinity, duration: 1 }}
