@@ -1,6 +1,6 @@
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import express, { Application } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import multer from 'multer';
 import path from 'path';
 import { Globals } from '../library/Globals/Globals';
@@ -8,6 +8,7 @@ import { LoggerUtils } from '../library/Utilities/LoggerUtils';
 import { GetRouter } from './Routes/Get';
 import { PostRouter } from './Routes/Post';
 import { PutRouter } from './Routes/Put';
+import bodyParser from 'body-parser';
 
 export class Server {
   private readonly app: Application;
@@ -22,18 +23,32 @@ export class Server {
   }
 
   private configureMiddleware(): void {
-    this.app.use(
-      cors({
-        origin: [Globals.FRONTEND_URL, Globals.API_URL],
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-        allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-        credentials: true
-      })
-    );
+    // CORS middleware
+    // const allowCrossDomain = (
+    //   req: Request,
+    //   res: Response,
+    //   next: NextFunction
+    // ) => {
+    //   res.header(`Access-Control-Allow-Origin`, [
+    //     Globals.FRONTEND_URL,
+    //     Globals.API_URL
+    //   ]);
+    //   res.header(`Access-Control-Allow-Methods`, [
+    //     'GET',
+    //     'PUT',
+    //     'POST',
+    //     'DELETE'
+    //   ]);
+    //   res.header(`Access-Control-Allow-Headers`, `Content-Type`);
+    //   next();
+    // };
 
-    this.app.options('*', cors());
+    // this.app.use(allowCrossDomain);
+
     this.app.use(cookieParser());
+    this.app.use(bodyParser.urlencoded());
     this.app.use(express.json());
+    this.app.use(cors({ credentials: true, origin: true }));
   }
 
   private configureRoutes(): void {
