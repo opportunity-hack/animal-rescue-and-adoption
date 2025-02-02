@@ -82,10 +82,10 @@ export default function ResponsiveAnimalCarousel({
               <div className="relative">
                 <motion.div transition={{ type: "spring", stiffness: 300 }}>
                   <img
-                    // src={animals[animalIndex].images[0]} // Use the first image from the images array
-                    src={
-                      "https://pbs.twimg.com/media/F2GWbheXYAAV2_a.jpg:large"
-                    }
+                    src={animals[animalIndex].images[0]} // Use the first image from the images array
+                    // src={
+                    //   "https://pbs.twimg.com/media/F2GWbheXYAAV2_a.jpg:large"
+                    // }
                     alt={animals[animalIndex].name}
                     className={`w-full h-[300px] sm:h-[350px] lg:h-[400px] object-cover ${
                       expandedIndex === index ? "blur-sm" : ""
@@ -98,7 +98,7 @@ export default function ResponsiveAnimalCarousel({
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className="absolute bottom-4 left-4 right-4 flex justify-between items-center"
+                      className="absolute bottom-4 left-4 right-6 flex justify-between items-center"
                     >
                       <div className="bg-black bg-opacity-50 text-wolfwhite px-3 py-1 rounded-lg">
                         <p className="text-md font-semibold">
@@ -111,7 +111,6 @@ export default function ResponsiveAnimalCarousel({
                       <motion.button
                         onClick={() => toggleExpand(index)}
                         className="bg-wolfwhite text-gray-800 rounded-full p-2 shadow-md"
-                        whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                         animate={{ y: [0, -5, 0] }}
                         transition={{ repeat: Infinity, duration: 1 }}
@@ -159,7 +158,7 @@ export default function ResponsiveAnimalCarousel({
                         </p>
                       </div>
                       <div className="flex justify-between items-center">
-                        <button className="bg-[#3A4D42] text-wolfwhite px-4 py-2 rounded-md font-outfit font-medium">
+                        <button className="bg-[#3A4D42] text-wolfwhite px-4 py-2 rounded-md font-outfit font-medium text-xs md:text-base">
                           <a
                             href="https://form.jotform.com/242855970936168"
                             target="_blank"
@@ -171,7 +170,6 @@ export default function ResponsiveAnimalCarousel({
                         <motion.button
                           onClick={() => toggleExpand(index)}
                           className="bg-wolfwhite text-gray-800 rounded-full p-2 shadow-md"
-                          whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                           animate={{ y: [0, -5, 0] }}
                           transition={{ repeat: Infinity, duration: 1 }}

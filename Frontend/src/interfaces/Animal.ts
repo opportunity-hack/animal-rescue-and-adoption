@@ -10,10 +10,10 @@ export enum AnimalSex {
 
 export enum AnimalStatus {
   ADOPTED = "adopted",
-  IN_REHABILITATION = "in rehabilitation",
+  IN_REHABILITATION = "in-rehabilitation",
   REHABILITATED = "rehabilitated",
   RELEASED = "released",
-  NO_STATUS = "no status",
+  NO_STATUS = "no-status",
 }
 
 /*
@@ -25,7 +25,6 @@ export interface IBaseAnimal
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface IAnimalData
   extends z.infer<typeof AnimalValidator.AnimalData> {}
-
 
 export type NewAnimalData = z.infer<typeof AnimalValidator.NewAnimalData>;
 

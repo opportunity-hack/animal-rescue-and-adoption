@@ -94,11 +94,11 @@ const Navbar: React.FC<NavbarProps> = ({ links, title, color, onClick }) => {
               to="/"
               className="font-['Montserrat'] font-bold text-xl sm:text-2xl md:text-3xl"
             >
-              <span className="block md:hidden">NEWRR</span>
-              <span className="hidden md:block">{title}</span>
+              <span className="block lg:hidden">NEWRR</span>
+              <span className="hidden lg:block">{title}</span>
             </Link>
           </div>
-          <div className="hidden md:flex space-x-4">
+          <div className="hidden md:flex items-center space-x-4 pl-4 lg:space-x-8">
             {links.map((link) => (
               <a
                 key={link.name}
@@ -107,7 +107,7 @@ const Navbar: React.FC<NavbarProps> = ({ links, title, color, onClick }) => {
                   e.preventDefault();
                   handleLinkClick(link.href, link.onClick);
                 }}
-                className="hover:text-gray-700"
+                className="hover:text-gray-700 text-center"
               >
                 {link.name}
               </a>

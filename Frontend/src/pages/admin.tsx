@@ -1,7 +1,5 @@
 import React from "react";
 import CustomGoogleLogin from "../components/GoogleLogin";
-
-
 const Admin: React.FC = () => {
   return (
     <>

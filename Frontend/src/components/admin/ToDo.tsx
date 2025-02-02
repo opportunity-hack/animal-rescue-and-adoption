@@ -10,11 +10,13 @@ const ToDo: React.FC = () => {
   const [newTodo, setNewTodo] = useState("");
 
   useEffect(() => {
-    axios.get<IToDoItem[]>(`${import.meta.env.VITE_G_API_URL}/get-todo`, {
-      withCredentials: true,
-    }).then((response) => {
-      setTodos(response.data);
-    });
+    axios
+      .get<IToDoItem[]>(`${import.meta.env.VITE_G_API_URL}/get-todo`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        setTodos(response.data);
+      });
   }, []);
 
   const addTodo = () => {
@@ -46,14 +48,16 @@ const ToDo: React.FC = () => {
     );
   };
 
-   const  saveTodos = async () => {
-    await axios.post(
-      `${import.meta.env.VITE_G_API_URL}/todo`,
-      { todos },
-      { withCredentials: true }
-    ).then(() => {
-      alert("To-do list saved!");
-    });
+  const saveTodos = async () => {
+    await axios
+      .post(
+        `${import.meta.env.VITE_G_API_URL}/todo`,
+        { todos },
+        { withCredentials: true }
+      )
+      .then(() => {
+        alert("To-do list saved!");
+      });
   };
 
   return (

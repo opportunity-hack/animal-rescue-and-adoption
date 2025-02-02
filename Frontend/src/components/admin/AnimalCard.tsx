@@ -3,6 +3,7 @@ import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { AnimalStatus, IAnimalData } from "../../interfaces/Animal";
 import { AnimalValidator } from "../../Validators/Animal";
+import { paramToTitleCase } from "../../helpers/ConvertCases";
 
 const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
   const [expanded, setExpanded] = useState(false);
@@ -13,6 +14,7 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
   console.log(formattedAnimal);
   // Function to get status color
   const getStatusColor = (status: AnimalStatus): string => {
+    console.log(status);
     switch (status) {
       case AnimalStatus.ADOPTED:
         return "bg-green-500";
@@ -33,9 +35,9 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
 
   const handleSave = async () => {
     try {
-       // Assuming you have a method to update the animal
-       const response = await axios.put<IAnimalData>(
-        `${import.meta.env.VITE_G_API_URL}/animal`,
+      // Assuming you have a method to update the animal
+      const response = await axios.put<IAnimalData>(
+        `${import.meta.env.VITE_G_API_URL}/put-animal-by-id`,
         formattedAnimal,
         {
           headers: {
@@ -74,14 +76,10 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
         expanded ? "h-auto" : "h-20"
       }`}
     >
-      {/* Status badge in the top right corner */}
-      <span
-        className={`absolute top-2 right-2 px-2 py-1 rounded-full text-black text-sm ${getStatusColor(animal.status)}`}
-      >
-        {animal.status}
-      </span>
       <div
-        className={`flex justify-between items-center ${expanded ? "mb-4" : ""}`}
+        className={`flex justify-between items-center ${
+          expanded ? "mb-4" : ""
+        }`}
       >
         <div className="flex items-center">
           <button
@@ -102,6 +100,14 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({ animal }) => {
             </p>
           </div>
         </div>
+        {/* Status badge moved here to align with the expand/collapse button */}
+        <span
+          className={`flex justify-center px-2 py-2 rounded-lg text-white text-sm ${getStatusColor(
+            animal.status
+          )}`}
+        >
+          {paramToTitleCase(animal.status)}
+        </span>
       </div>
       {expanded && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

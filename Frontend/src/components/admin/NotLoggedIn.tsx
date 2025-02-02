@@ -18,13 +18,18 @@ const NotLoggedIn: React.FC<NotLoggedInProps> = ({ hasUser }) => {
 
   // Function to handle logout
   const handleLogout = async () => {
-    await axios.post(`${import.meta.env.VITE_G_API_URL}/logout`, {}, { withCredentials: true })
-    .then(() => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-    })
-    .then(() => {
-      navigate("/admin"); // Redirect to the admin login page
-    })
+    await axios
+      .post(
+        `${import.meta.env.VITE_G_API_URL}/logout`,
+        {},
+        { withCredentials: true }
+      )
+      .then(() => {
+        queryClient.invalidateQueries({ queryKey: ["user"] });
+      })
+      .then(() => {
+        navigate("/admin"); // Redirect to the admin login page
+      });
   };
 
   return (
