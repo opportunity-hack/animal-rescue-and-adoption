@@ -18,6 +18,10 @@ export class GetRouter extends RequestRouter {
       this.handleRequest(ValidRoutes.GetAdminUsers, req, res, true);
     });
 
+    this.router.get('/get-volunteer-users', (req, res) => {
+      this.handleRequest(ValidRoutes.GetVolunteerUsers, req, res, true);
+    });
+
     this.router.get('/get/animal', (req, res) => {
       this.handleRequest(ValidRoutes.GetAnimalById, req, res, false);
     });
