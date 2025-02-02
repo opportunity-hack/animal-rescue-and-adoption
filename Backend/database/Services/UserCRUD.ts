@@ -10,7 +10,6 @@ export class UserCRUD {
   public static async createUser(user: Omit<IUser, '_id'>): Promise<IUser> {
     const newUser = await User.create(user);
     const populatedUser = await newUser.populate('role');
-    // Explicitly cast the plain object to IUser
     return populatedUser.toObject() as IUser;
   }
 
@@ -19,7 +18,6 @@ export class UserCRUD {
     google_id: string
   ): Promise<IUser | null> {
     const user = await User.findOne({ google_id }).populate('role').lean();
-    // You can also cast here if needed:
     return user as IUser | null;
   }
 
