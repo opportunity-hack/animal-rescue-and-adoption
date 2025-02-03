@@ -8,6 +8,7 @@ import axios from "axios";
 const ToDo: React.FC = () => {
   const [todos, setTodos] = useState<IToDoItem[]>([]);
   const [newTodo, setNewTodo] = useState("");
+  const [saveMessage, setSaveMessage] = useState<string>("");
 
   useEffect(() => {
     axios
@@ -56,7 +57,10 @@ const ToDo: React.FC = () => {
         { withCredentials: true }
       )
       .then(() => {
-        alert("To-do list saved!");
+        setSaveMessage("Saved");
+        setTimeout(() => {
+          setSaveMessage("");
+        }, 1500); // Message will disappear after 3 seconds
       });
   };
 
@@ -115,6 +119,11 @@ const ToDo: React.FC = () => {
         >
           Save
         </button>
+        {saveMessage && (
+          <div className="text-center text-sage font-['outfit'] transition-opacity duration-1000 ease-in-out">
+            {saveMessage}
+          </div>
+        )}
       </div>
     </motion.div>
   );

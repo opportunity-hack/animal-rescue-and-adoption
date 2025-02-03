@@ -98,9 +98,7 @@ const VolunteerUsers: React.FC = () => {
                 <span className="text-sm">{user.role.name}</span>
                 <Trash
                   className="w-4 h-4 ml-4 cursor-pointer"
-                  onClick={() => {
-                    handleDelete(user.email);
-                  }}
+                  onClick={() => handleDelete(user.email)}
                 />
               </div>
             </motion.div>
