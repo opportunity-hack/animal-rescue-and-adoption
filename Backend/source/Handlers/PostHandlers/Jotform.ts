@@ -19,7 +19,7 @@ export class Jotform extends Handler<ServerEvent> {
       this.event.req.body['rawRequest'] as string
     );
 
-    await axios.post(`${Globals.API_URL}/post/animal`, {
+    await axios.post(`${Globals.VITE_G_API_URL}/post/animal`, {
       name: animalData.name,
       species: animalData.species,
       sex: animalData.sex,

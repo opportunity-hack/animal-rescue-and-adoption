@@ -41,7 +41,9 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.670.0",
+    "@types/body-parser": "^1.19.5",
     "axios": "^1.7.5",
+    "body-parser": "^1.20.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

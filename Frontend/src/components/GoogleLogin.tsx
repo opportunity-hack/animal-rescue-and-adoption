@@ -20,17 +20,19 @@ function CustomGoogleLogin() {
 
   // if user logins, we need to decode the credential to get their profile
   useEffect(() => {
-    if (!user?.credential || !user.clientId) return;
+    console.log(import.meta.env.VITE_G_CLIENT_ID);
+
+    if (!user?.credential || !user?.clientId) return;
 
     const sendLoginDataToBackend = async (
       credential: string,
       client_id: string
     ) => {
-        await axios.post<GoogleAuthResponse>(
-            `${import.meta.env.VITE_G_API_URL}/google-auth`,
-            { credential, client_id },
-            { withCredentials: true }
-        );
+      await axios.post<GoogleAuthResponse>(
+        `${import.meta.env.VITE_G_API_URL}/google-auth`,
+        { credential, client_id },
+        { withCredentials: true }
+      );
 
       // Invalidate and refetch user query
       await queryClient.invalidateQueries({ queryKey: ["user"] });
@@ -39,7 +41,7 @@ function CustomGoogleLogin() {
       //setProfile({email, name, picture, authenticated: role.perm_level > 5});
       await setTimeout(() => {
         //navigate("/admin/dashboard");
-      }, 10000)
+      }, 10000);
     };
 
     try {
@@ -54,7 +56,7 @@ function CustomGoogleLogin() {
 
       //Send data to backend for validation and role access
       console.log("Profile set... Sending to backend");
-      sendLoginDataToBackend(user.credential, user.clientId);
+      sendLoginDataToBackend(user.credential, import.meta.env.VITE_G_CLIENT_ID);
 
       console.log("Sent to backend");
     } catch (error) {

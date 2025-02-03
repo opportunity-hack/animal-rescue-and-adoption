@@ -15,7 +15,9 @@ const AdoptAnimalSection: React.FC = () => {
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
-        const response = await axios.get<IAnimalData[]>(`${import.meta.env.VITE_G_API_URL}/get/animals`);
+        const response = await axios.get<IAnimalData[]>(
+          `${import.meta.env.VITE_G_API_URL}/get/animals`
+        );
         setResults(response.data);
       } catch (error) {
         console.error("Error fetching animals:", error);
