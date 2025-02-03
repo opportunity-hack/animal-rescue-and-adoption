@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Plus, User, Mail, Shield } from "lucide-react";
+import { Plus, User, Mail, Shield, Trash } from "lucide-react";
 import { UserDetails } from "../../interfaces/User";
 import axios from "axios";
 
@@ -30,12 +30,25 @@ const VolunteerUsers: React.FC = () => {
         { email },
         { withCredentials: true }
       );
-
       setEmail("");
       await fetchUsers();
     } catch (error) {
       console.error("Error adding user:", error);
       alert("Failed to add user. Please try again.");
+    }
+  };
+
+  const handleDelete = async (email: string) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_G_API_URL}/remove/volunteer`, {
+        data: { email },
+
+        withCredentials: true,
+      });
+      await fetchUsers();
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert("Failed to delete user. Please try again.");
     }
   };
 
@@ -83,6 +96,12 @@ const VolunteerUsers: React.FC = () => {
                 <span className="text-sm mr-4">{user.email}</span>
                 <Shield className="w-4 h-4 mr-1" />
                 <span className="text-sm">{user.role.name}</span>
+                <Trash
+                  className="w-4 h-4 ml-4 cursor-pointer"
+                  onClick={() => {
+                    handleDelete(user.email);
+                  }}
+                />
               </div>
             </motion.div>
           ))

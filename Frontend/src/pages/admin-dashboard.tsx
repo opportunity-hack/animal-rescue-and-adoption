@@ -63,13 +63,16 @@ const AdminDashboard: React.FC = () => {
       <div id="management">
         <TaskManagement />
       </div>
-      <div
-        id="admins"
-        className="flex flex-col items-center px-4 md:px-6 lg:px-8"
-      >
-        <AdminUsers />
-        <VolunteerUsers />
-      </div>
+      {user.data?.role.perm_level && user.data.role.perm_level > 5 && (
+        <div
+          id="admins"
+          className="flex flex-col items-center px-4 md:px-6 lg:px-8"
+        >
+          <AdminUsers />
+          <VolunteerUsers />
+        </div>
+      )}
+
       <div id="animals">
         <AnimalManagement />
       </div>
