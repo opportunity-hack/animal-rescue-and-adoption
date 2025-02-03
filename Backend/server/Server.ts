@@ -36,8 +36,8 @@ export class Server {
 
     this.app.use('/api', new GetRouter().router);
     this.app.use('/api', upload.any(), new PostRouter().router);
-    this.app.use('/api', new PutRouter().router);
     this.app.use('/api', new DeleteRouter().router);
+    this.app.use('/api', new PutRouter().router);
 
     this.app.use(
       '/docs',
