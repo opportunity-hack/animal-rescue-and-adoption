@@ -20,13 +20,18 @@ export default function ResponsiveAnimalCarousel({
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const [direction, setDirection] = useState(0);
 
+  // Filter the animals array to include only rehabilitated animals
+  const rehabilitatedAnimals = animals.filter(
+    (animal) => animal.status === "rehabilitated"
+  );
+
   useEffect(() => {
     const handleResize = () => {
       const numVisible =
         window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
       setCurrentIndices(
         Array.from(
-          { length: Math.min(numVisible, animals.length) },
+          { length: Math.min(numVisible, rehabilitatedAnimals.length) },
           (_, i) => i
         )
       );
@@ -35,18 +40,23 @@ export default function ResponsiveAnimalCarousel({
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [animals.length]);
+  }, [rehabilitatedAnimals.length]);
 
   const nextSlide = () => {
     setDirection(1);
-    setCurrentIndices((prev) => prev.map((i) => (i + 1) % animals.length));
+    setCurrentIndices((prev) =>
+      prev.map((i) => (i + 1) % rehabilitatedAnimals.length)
+    );
     setExpandedIndex(null);
   };
 
   const prevSlide = () => {
     setDirection(-1);
     setCurrentIndices((prev) =>
-      prev.map((i) => (i - 1 + animals.length) % animals.length)
+      prev.map(
+        (i) =>
+          (i - 1 + rehabilitatedAnimals.length) % rehabilitatedAnimals.length
+      )
     );
     setExpandedIndex(null);
   };
@@ -64,8 +74,6 @@ export default function ResponsiveAnimalCarousel({
     return () => window.removeEventListener("keydown", handleKeyDown);
   });
 
-  //console.log(animals);
-
   return (
     <div className="relative w-full max-w-7xl mx-auto py-8 px-8 sm:py-12 sm:px-10 lg:py-16 lg:px-12">
       <div className="flex items-center justify-center gap-4">
@@ -82,11 +90,8 @@ export default function ResponsiveAnimalCarousel({
               <div className="relative">
                 <motion.div transition={{ type: "spring", stiffness: 300 }}>
                   <img
-                    src={animals[animalIndex].images[0]} // Use the first image from the images array
-                    // src={
-                    //   "https://pbs.twimg.com/media/F2GWbheXYAAV2_a.jpg:large"
-                    // }
-                    alt={animals[animalIndex].name}
+                    src={rehabilitatedAnimals[animalIndex].images[0]} // Use the first image from the images array
+                    alt={rehabilitatedAnimals[animalIndex].name}
                     className={`w-full h-[300px] sm:h-[350px] lg:h-[400px] object-cover ${
                       expandedIndex === index ? "blur-sm" : ""
                     }`}
@@ -102,10 +107,10 @@ export default function ResponsiveAnimalCarousel({
                     >
                       <div className="bg-black bg-opacity-50 text-wolfwhite px-3 py-1 rounded-lg">
                         <p className="text-md font-semibold">
-                          {animals[animalIndex].name}
+                          {rehabilitatedAnimals[animalIndex].name}
                         </p>
                         <p className="text-xs pb-1">
-                          {animals[animalIndex].species}
+                          {rehabilitatedAnimals[animalIndex].species}
                         </p>
                       </div>
                       <motion.button
@@ -132,29 +137,37 @@ export default function ResponsiveAnimalCarousel({
                       <div className="flex justify-between items-start mb-4">
                         <div>
                           <h3 className="text-lg font-semibold">
-                            {animals[animalIndex].name}
+                            {rehabilitatedAnimals[animalIndex].name}
                           </h3>
                           <p className="text-sm">
-                            {animals[animalIndex].species}
+                            {rehabilitatedAnimals[animalIndex].species}
                           </p>
                         </div>
                         <div className="text-sm text-right">
                           <p>
-                            {animals[animalIndex].age || "Unknown"} years old
+                            {rehabilitatedAnimals[animalIndex].age || "Unknown"}{" "}
+                            years old
                           </p>
-                          <p>{animals[animalIndex].breed || "Unknown breed"}</p>
+                          <p>
+                            {rehabilitatedAnimals[animalIndex].breed ||
+                              "Unknown breed"}
+                          </p>
                         </div>
                       </div>
                       <div className="flex-grow overflow-y-auto pr-4 custom-scrollbar">
                         <p className="text-sm mt-2">
                           Medical Info:{" "}
-                          {animals[animalIndex].medicalInfo || "None"}
+                          {rehabilitatedAnimals[animalIndex].medicalInfo ||
+                            "None"}
                         </p>
                         <p className="text-sm mt-2">
-                          Location: {animals[animalIndex].location || "Unknown"}
+                          Location:{" "}
+                          {rehabilitatedAnimals[animalIndex].location ||
+                            "Unknown"}
                         </p>
                         <p className="text-sm mt-2">
-                          Notes: {animals[animalIndex].notes || "None"}
+                          Notes:{" "}
+                          {rehabilitatedAnimals[animalIndex].notes || "None"}
                         </p>
                       </div>
                       <div className="flex justify-between items-center">
@@ -188,7 +201,7 @@ export default function ResponsiveAnimalCarousel({
       </div>
 
       {/* Navigation Buttons */}
-      {animals.length > 1 && (
+      {rehabilitatedAnimals.length > 1 && (
         <>
           <button
             onClick={prevSlide}

@@ -4,7 +4,7 @@ import axios from "axios";
 import { AnimalStatus, IAnimalData } from "../../interfaces/Animal";
 import { AnimalValidator } from "../../Validators/Animal";
 import { paramToTitleCase } from "../../helpers/ConvertCases";
-import { ZodError } from "zod";
+import { set, ZodError } from "zod";
 
 const AnimalCard: React.FC<{ animal: IAnimalData }> = ({
   animal: initialAnimal,
@@ -293,7 +293,11 @@ const AnimalCard: React.FC<{ animal: IAnimalData }> = ({
                   Save
                 </button>
                 <button
-                  onClick={() => setExpanded(false)}
+                  onClick={() => {
+                    setEditedAnimal(animal);
+                    setExpanded(false);
+                    setEditing(false);
+                  }}
                   className="bg-red-500 text-white ml-2 px-3 py-1 rounded font-['outfit']"
                 >
                   Close
