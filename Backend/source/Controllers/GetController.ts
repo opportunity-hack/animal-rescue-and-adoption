@@ -12,6 +12,7 @@ import { GetBehaviorById } from '../Handlers/GetHandlers/GetBehaviorById';
 import { GetBehaviorByName } from '../Handlers/GetHandlers/GetBehaviorByName';
 import { GetAllBehaviors } from '../Handlers/GetHandlers/GetBehaviors';
 import { GetToDo } from '../Handlers/GetHandlers/GetToDo';
+import { GetVolunteerUsers } from '../Handlers/GetHandlers/GetVolunteerUsers';
 
 export class GetController extends Controller<ServerEvent> {
   private routeId: ValidRoutes;
@@ -29,6 +30,8 @@ export class GetController extends Controller<ServerEvent> {
         return new GetToDo(this.trigger);
       case ValidRoutes.GetAdminUsers:
         return new GetAdminUsers(this.trigger);
+      case ValidRoutes.GetVolunteerUsers:
+        return new GetVolunteerUsers(this.trigger);
       case ValidRoutes.GetAllAnimals:
         return new GetAllAnimals(this.trigger);
       case ValidRoutes.GetAnimalById:

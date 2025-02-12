@@ -27,7 +27,7 @@ export class UserCRUD {
     return user as IUser | null;
   }
 
-  @DBCatchable('Error fetching user by ID')
+  @DBCatchable('Error adding volunteer user')
   public static async addVolunteerUser(email: string): Promise<IUser | null> {
     const volunteerRole = await UserRole.findOne({
       name: DefaultRoles.Volunteer
@@ -37,17 +37,17 @@ export class UserCRUD {
       throw new RoleNotFound('Volunteer role not found');
     }
 
-    const updatedUser = await User.findOneAndUpdate(
+    const newUser = await User.findOneAndUpdate(
       { email },
       { role: volunteerRole._id },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true, upsert: true }
     ).populate('role');
 
-    if (!updatedUser) {
+    if (!newUser) {
       throw new Error('User not found');
     }
 
-    return updatedUser.toObject() as IUser;
+    return newUser.toObject() as IUser;
   }
 
   @DBCatchable('Error fetching volunteer users')
@@ -94,17 +94,17 @@ export class UserCRUD {
       throw new RoleNotFound('Admin role not found');
     }
 
-    const updatedUser = await User.findOneAndUpdate(
+    const newUser = await User.findOneAndUpdate(
       { email },
       { role: adminRole._id },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true, upsert: true }
     ).populate('role');
 
-    if (!updatedUser) {
+    if (!newUser) {
       throw new Error('User not found');
     }
 
-    return updatedUser.toObject() as IUser;
+    return newUser.toObject() as IUser;
   }
 
   @DBCatchable('Error fetching admin users')
@@ -134,17 +134,17 @@ export class UserCRUD {
       throw new RoleNotFound('Volunteer role not found');
     }
 
-    const updatedUser = await User.findOneAndUpdate(
+    const newUser = await User.findOneAndUpdate(
       { email },
       { role: volunteerRole._id },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true, upsert: true }
     ).populate('role');
 
-    if (!updatedUser) {
+    if (!newUser) {
       throw new Error('User not found');
     }
 
-    return updatedUser.toObject() as IUser;
+    return newUser.toObject() as IUser;
   }
 
   @DBCatchable('Error fetching volunteer users')
