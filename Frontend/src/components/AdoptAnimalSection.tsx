@@ -19,7 +19,7 @@ const AdoptAnimalSection: React.FC = () => {
           `${import.meta.env.VITE_G_API_URL}/get/animals`
         );
         if(response.data && response.data.length >= 0) setResults(response.data);
-        else console.log(response.data)
+        console.log(response.data)
       } catch (error) {
         console.error("Error fetching animals:", error);
       } finally {
