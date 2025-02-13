@@ -1,12 +1,13 @@
+import { HttpStatusCode } from 'axios';
 import { UserCRUD } from '../../../database/Services/UserCRUD';
 import { Catchable } from '../../../library/Decorators/Catchable';
 import {
   Handler,
   ServerEvent
 } from '../../../library/Interfaces/HandlerController';
-import { HttpStatusCode } from 'axios';
+import { MissingBody } from '../../../library/Errors/Params';
 
-export class AddAdminUser extends Handler<ServerEvent> {
+export class RemoveVolunteerUser extends Handler<ServerEvent> {
   constructor(event: ServerEvent) {
     super(event);
   }
@@ -16,10 +17,10 @@ export class AddAdminUser extends Handler<ServerEvent> {
     const { email } = this.event.req.body;
 
     if (!email && typeof email !== 'string') {
-      throw new Error('Invalid email provided');
+      throw new MissingBody('Invalid email provided', ['email']);
     }
 
-    const user = await UserCRUD.addAdminUser(email);
+    const user = await UserCRUD.removeVolunteerUser(email);
 
     this.event.res.status(HttpStatusCode.Ok).json(user);
   }

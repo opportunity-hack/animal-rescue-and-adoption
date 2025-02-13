@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Heart, Feather, Truck, BookOpen } from "lucide-react";
 
-// About component definition
 const About = () => {
   return (
     <section className="bg-[#61805B] flex items-center justify-center py-16 lg:py-36 px-16">

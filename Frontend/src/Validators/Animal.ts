@@ -16,6 +16,8 @@ export class AnimalValidator {
     intakeDate: z.number(),
   });
 
+  private static ToNumber = z.string().pipe(z.coerce.number());
+
   public static AnimalData = z
     .object({
       name: z.string(),
@@ -24,12 +26,12 @@ export class AnimalValidator {
       status: z.nativeEnum(AnimalStatus),
       images: z.array(z.string().url()),
       behaviors: z.array(AnimalValidator.Behavior),
-      age: z.number().optional(),
+      age: z.number().or(this.ToNumber).optional(),
       breed: z.string().optional(),
       medicalInfo: z.string().optional(),
       location: z.string().optional(),
       notes: z.string().optional(),
-      weight: z.number().optional(),
+      weight: z.number().or(this.ToNumber).optional(),
     })
     .merge(AnimalValidator.BaseAnimal);
 

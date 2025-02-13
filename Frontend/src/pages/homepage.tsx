@@ -14,7 +14,7 @@ const Home: React.FC = () => {
     { name: "Donate", href: "#donate" },
   ];
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 overflow-hidden">
       <Navbar
         links={homepageLinks}
         title={"Nature's Edge Wildlife and Reptile Rescue"}

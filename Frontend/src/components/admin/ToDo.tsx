@@ -8,13 +8,16 @@ import axios from "axios";
 const ToDo: React.FC = () => {
   const [todos, setTodos] = useState<IToDoItem[]>([]);
   const [newTodo, setNewTodo] = useState("");
+  const [saveMessage, setSaveMessage] = useState<string>("");
 
   useEffect(() => {
-    axios.get<IToDoItem[]>(`${import.meta.env.VITE_G_API_URL}/get-todo`, {
-      withCredentials: true,
-    }).then((response) => {
-      setTodos(response.data);
-    });
+    axios
+      .get<IToDoItem[]>(`${import.meta.env.VITE_G_API_URL}/get-todo`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        setTodos(response.data);
+      });
   }, []);
 
   const addTodo = () => {
@@ -46,14 +49,19 @@ const ToDo: React.FC = () => {
     );
   };
 
-   const  saveTodos = async () => {
-    await axios.post(
-      `${import.meta.env.VITE_G_API_URL}/todo`,
-      { todos },
-      { withCredentials: true }
-    ).then(() => {
-      alert("To-do list saved!");
-    });
+  const saveTodos = async () => {
+    await axios
+      .post(
+        `${import.meta.env.VITE_G_API_URL}/todo`,
+        { todos },
+        { withCredentials: true }
+      )
+      .then(() => {
+        setSaveMessage("Saved");
+        setTimeout(() => {
+          setSaveMessage("");
+        }, 1500); // Message will disappear after 3 seconds
+      });
   };
 
   return (
@@ -111,6 +119,11 @@ const ToDo: React.FC = () => {
         >
           Save
         </button>
+        {saveMessage && (
+          <div className="text-center text-sage font-['outfit'] transition-opacity duration-1000 ease-in-out">
+            {saveMessage}
+          </div>
+        )}
       </div>
     </motion.div>
   );

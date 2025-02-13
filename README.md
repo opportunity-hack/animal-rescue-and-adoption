@@ -20,7 +20,7 @@
 
 ## Project Overview
 **Problem Statement:**
-Problem: NEWRR struggles with manual processes for donation tracking, thank-you cards, and animal intake/adoption forms, leading to inefficiencies and missed engagement opportunities.
+Problem: NEWRR struggles with a manual processes for donation tracking, thank-you cards, and animal intake/adoption forms, leading to inefficiencies and missed engagement opportunities.
 Goal: Develop a cloud-based system to streamline donation management, automate donor communications, and digitize animal-related forms and processes.
 Key Features: Implement digital forms with unique URLs, donation tracking with automated thank-you notes, role-based access controls, and potential for task management and multimedia file integration.
 **About our approach:**
