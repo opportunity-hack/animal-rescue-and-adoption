@@ -1,3 +1,4 @@
+// Entry Point
 import { Database } from './database/Database';
 import { Server } from './server/Server';
 
