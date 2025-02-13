@@ -38,7 +38,7 @@ export class CreateAnimal extends Handler<ServerEvent> implements IHasChecks {
     });
   }
 
-  @Catchable(true)
+  @Catchable()
   async execute(): Promise<void> {
     const images: ImageUploadType = this.newAnimalData.images.map((image) => {
       return {

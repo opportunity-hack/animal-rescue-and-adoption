@@ -18,7 +18,7 @@ export class Globals {
   public static readonly DB_NAME = process.env.DB_NAME || '';
   public static readonly MONGO_URI = process.env.MONGODB_URI || '';
   public static readonly PORT = process.env.PORT || 3000;
-  public static readonly VITE_G_API_URL = process.env.VITE_G_API_URL || '';
+  public static readonly BACKEND_URL = process.env.BACKEND_URL || '';
   public static readonly FRONTEND_URL = process.env.FRONTEND_URL || '';
   public static readonly JWT_SECRET = process.env.JWT_SECRET || '';
   public static readonly V_EMAIL = process.env.V_EMAIL || '';
