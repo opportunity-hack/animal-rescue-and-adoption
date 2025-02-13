@@ -112,7 +112,7 @@ export class ErrorUtils {
     );
 
     if (showError) {
-      LoggerUtils.error(error);
+      console.error(error);
     }
 
     const errorName = error instanceof Error ? error.name : '';

@@ -8,7 +8,6 @@ This backend system was developed for NEWRR's website (New England Wildlife Resc
 
 - User Authentication and Authorization
 - Animal Management System
-- Behavior Tracking
 - Task Management (ToDo)
 - Admin User Management
 - Integration with External Services (e.g., Jotform)
