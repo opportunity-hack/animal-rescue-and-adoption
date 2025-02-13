@@ -18,7 +18,8 @@ const AdoptAnimalSection: React.FC = () => {
         const response = await axios.get<IAnimalData[]>(
           `${import.meta.env.VITE_G_API_URL}/get/animals`
         );
-        setResults(response.data);
+        if(response.data && response.data.length >= 0) setResults(response.data);
+        else console.log(response.data)
       } catch (error) {
         console.error("Error fetching animals:", error);
       } finally {
