@@ -46,7 +46,7 @@ const AdoptAnimalSection: React.FC = () => {
         </div>
         {loading ? (
           <Spinner /> // Show a spinner while loading
-        ) : results.length > 3 ? (
+        ) : results.length >= 1 ? (
           <div className="carousel flex justify-center items-center space-x-4">
             <EnhancedAnimalCarousel animals={results} />
           </div>
