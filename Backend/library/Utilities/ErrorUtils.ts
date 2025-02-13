@@ -111,6 +111,8 @@ export class ErrorUtils {
       `${(error as Error).name} ` + `${(error as Error).message}`
     );
 
+    console.error(error);
+
     if (showError) {
       console.error(error);
     }
@@ -128,6 +130,7 @@ export class ErrorUtils {
     CustomError: T
   ): never {
     LoggerUtils.error(error);
+    console.error(error);
 
     if (error instanceof Error) {
       throw new CustomError(`${message}: ${error.message}`);
