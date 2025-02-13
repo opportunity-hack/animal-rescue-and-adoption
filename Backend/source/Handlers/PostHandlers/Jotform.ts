@@ -19,6 +19,8 @@ export class Jotform extends Handler<ServerEvent> {
       this.event.req.body['rawRequest'] as string
     );
 
+    console.log(animalData);
+
     await axios.post(`${Globals.BACKEND_URL}/post/animal`, {
       name: animalData.name,
       species: animalData.species,
