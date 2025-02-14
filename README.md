@@ -2,8 +2,8 @@
 # 2024 Opportunity Hack @ASU Winners
 
 ## MOST UPDATED REPO(S)
-- [Backend repo](https://github.com/materwelonDhruv/newrr-backend/)
-- [Frontend repo](https://github.com/JonathanAmdahl/oc-frontend)
+- [Backend repo](https://github.com/newrr-ohack/Animal-Rescue-OSS/Backend)
+- [Frontend repo](https://github.com/newrr-ohack/Animal-Rescue-OSS/Frontend)
 
 ## Quick Links
 - [Hackathon Details](https://www.ohack.dev/hack/2024_fall)
@@ -12,7 +12,7 @@
 - [Problem Statement](https://ohack.dev/project/nsxPhAtgiL8MMiX0rKj7)
 
 ## Team "Amdahl's Law"
-- [Ronald McInnes](https://github.com/rondawgx3)
+- [Ronald McInnes](https://github.com/ronaldmcinnes)
 - [Andrew Le](https://github.com/pandrewle)
 - [Jonathan Amdahl](https://github.com/JonathanAmdahl)
 - [Dhruv Jain](https://github.com/materwelondhruv)
@@ -40,8 +40,7 @@ We chose to decrease complexity for administrative users at the nonprofit by usi
 Instructions on how to set up and run our project locally.
 
 ```bash
-git clone https://github.com/2024-Arizona-Opportunity-Hack/NEWRR
-cd NEWRR
+git clone https://https://github.com/newrr-ohack/Animal-Rescue-OSS
 cd Frontend
 pnpm install
 pnpm run dev

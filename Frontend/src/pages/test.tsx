@@ -4,7 +4,7 @@ import GoogleLogin from "../components/GoogleLogin";
 const Test: React.FC = () => {
   return (
     <div>
-      <h1>Test Page</h1>
+      <h1>Test Page1</h1>
       <GoogleLogin />
     </div>
   );

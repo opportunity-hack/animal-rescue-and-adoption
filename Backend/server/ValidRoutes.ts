@@ -10,7 +10,7 @@ export enum ValidRoutes {
   AddVolunteerUser = 'add-volunteer-user',
   RemoveVolunteerUser = 'remove-volunteer-user',
 
-  JotformCheckin = 'jotform-checkin', // POST WEBHOOK
+  JotformCheckin = 'jotform-checkin', // POST WEBHOOK for listening for form submissions
 
   CreateAnimal = 'post-animal', // POST
   GetAnimalById = 'get-animal-by-id', // GET
