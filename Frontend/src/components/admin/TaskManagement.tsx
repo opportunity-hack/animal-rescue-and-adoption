@@ -8,7 +8,7 @@ const TaskManagement: React.FC = () => {
     {
       title: "GiveButter",
       icon: <DollarSign className="w-6 h-6" />,
-      items: [
+      items: [ //replace with new givebutter campaign links when published by newrr@ohack.org account
         {
           name: "Donations",
           icon: <DollarSign className="w-4 h-4" />,
@@ -55,9 +55,9 @@ const TaskManagement: React.FC = () => {
           url: "https://form.jotform.com/250316131267145",
         },
         {
-          name: "Check-out",
+          name: "Digital Rights",
           icon: <CheckSquare className="w-4 h-4" />,
-          url: "/check-out",
+          url: "https://form.jotform.com/250316389180154",
         },
       ],
     },
