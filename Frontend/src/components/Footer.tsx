@@ -12,7 +12,7 @@ const Footer: React.FC<FooterProps> = ({ color }) => {
       <div className="container mx-auto flex flex-col md:flex-row justify-center items-center px-16">
         <div className="flex md:space-x-20 space-x-5">
           <a
-            href="https://form.jotform.com/242857471828065"
+            href="https://form.jotform.com/250316389180154"
             className="hover:text-gray-300 hover:underline"
           >
             Digital Rights

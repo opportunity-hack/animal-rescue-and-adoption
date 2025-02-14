@@ -17,7 +17,7 @@ const DonateSection = () => {
           </p>
           <button className="bg-[#3A4D42] text-white px-6 py-2 w-fit rounded font-outfit font-medium">
             <a
-              href="https://givebutter.com/wbRK0J"
+              href="https://givebutter.com/wbRK0J" //href="https://givebutter.com/RlS6V8" (link of unpublished campaign owned by newrr@ohack.org account)
               target="_blank"
               rel="noreferrer"
             >
@@ -27,7 +27,7 @@ const DonateSection = () => {
         </div>
         <div className="flex items-center justify-center w-full">
           <div className="sm:pl-16 w-full">
-            <givebutter-widget
+            <givebutter-widget //replace with id of new campaign when published by newrr@ohack.org account
               id="jDJPKg"
               height="auto"
               style={{ width: "100%" }}
