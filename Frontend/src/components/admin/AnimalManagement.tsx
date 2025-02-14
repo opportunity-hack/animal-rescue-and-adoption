@@ -16,7 +16,7 @@ const AnimalManagement: React.FC = () => {
     []
   );
   const [currentPage, setCurrentPage] = useState(1);
-  const animalsPerPage = 9;
+  const animalsPerPage = 10;
 
   useEffect(() => {
     const fetchAnimals = async () => {
