@@ -19,7 +19,7 @@ export class AnimalCRUD {
   ): Promise<IAnimalData> {
     const animalData: NewAnimalData & { status: AnimalStatus } = {
       ...newAnimalData,
-      status: AnimalStatus.REHABILITATED
+      status: AnimalStatus.IN_REHABILITATION
     };
 
     const animal = await Animal.create(animalData);
