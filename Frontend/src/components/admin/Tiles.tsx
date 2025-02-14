@@ -10,6 +10,7 @@ interface TileProps {
     icon: React.ReactNode;
     actions?: string[];
     url?: string;
+    url2?: string;
   }[];
 }
 
@@ -49,7 +50,7 @@ const Tile: React.FC<TileProps> = ({ title, icon, items }) => {
                 <button
                   onClick={() =>
                     copyToClipboard(
-                      `https://example.com/${item.name.toLowerCase().replace(" ", "-")}`
+                      `${item.url}`
                     )
                   }
                   className="bg-sage text-darkestgreen px-2 py-1 rounded-md text-xs md:text-sm flex items-center justify-center w-1/2"
@@ -58,7 +59,7 @@ const Tile: React.FC<TileProps> = ({ title, icon, items }) => {
                   Share
                 </button>
                 <a
-                  href={item.url || "#"}
+                  href={item.url2 || "#"}
                   className="bg-sage text-darkestgreen px-2 py-1 rounded-md text-xs md:text-sm flex items-center justify-center w-1/2"
                 >
                   <MessageSquare className="w-3 h-3 md:w-4 md:h-4 mr-1" />
