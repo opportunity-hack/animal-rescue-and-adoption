@@ -1,0 +1,22 @@
+# fly.toml app configuration file generated for frontend-white-darkness-3758 on 2025-02-22T14:16:30-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'frontend-white-darkness-3758'
+primary_region = 'lax'
+
+[build]
+
+[http_service]
+  internal_port = 4173
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

@@ -1,49 +1,28 @@
-# Stage 1: Build the Frontend
-FROM node:22-alpine AS builder
+# syntax = docker/dockerfile:1
 
-ARG VITE_G_API_URL
-ARG RAILWAY_ENVIRONMENT
-ARG RAILWAY_SERVICE_NAME
+ARG NODE_VERSION=20.10.0
+FROM node:${NODE_VERSION}-slim
 
-# Set working directory
+LABEL fly_launch_runtime="Vite"
+
 WORKDIR /app
 
-# Install pnpm globally
-RUN npm install -g pnpm
+ENV NODE_ENV="production"
+ENV VITE_G_API_URL="https://backend-young-log-855.fly.dev/api"
+ENV VITE_G_CLIENT_ID="26525210223-bpf7edsqfarqju9prhint6a9ipjqebrm.apps.googleusercontent.com"
 
-# Copy root package.json, pnpm-workspace.yaml, and pnpm-lock.yaml
-COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY package.json ./
+# Copy vite.config.js to /app
+COPY vite.config.ts ./
+RUN npm install
+RUN npm install -g serve
 
-# Install all dependencies
-RUN pnpm install
 
-# Copy all workspace packages (includes API, Backend, Frontend)
+
 COPY . .
+RUN npm run build
 
-# Build the Frontend
-RUN pnpm --filter frontend run build
 
-# Stage 2: Serve with Nginx
-FROM nginx:alpine
 
-# Install gettext for envsubst (environment variable substitution)
-RUN apk add --no-cache gettext
-
-# Copy custom Nginx configuration template
-COPY Frontend/nginx.conf.template /etc/nginx/nginx.conf.template
-
-# Copy entrypoint script
-COPY Frontend/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-# Remove default Nginx static assets
-RUN rm -rf /usr/share/nginx/html/*
-
-# Copy built Frontend code from builder
-COPY --from=builder /app/Frontend/dist /usr/share/nginx/html
-
-# Expose port 80
-EXPOSE 80
-
-# Set entrypoint to handle dynamic configuration and start Nginx
-ENTRYPOINT ["/entrypoint.sh"]
+EXPOSE 4173
+CMD ["serve", "-s", "dist", "-l", "4173"]

@@ -55,3 +55,5 @@ Thumbs.db
 **/*.*proj.user
 **/*.dbmdl
 **/*.jfm
+Frontend/.env
+Backend/.env
