@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
               Rescuing, Rehabilitating, and Rehoming Wildlife and Reptiles.
             </h2>
             <p className="font-['Outfit'] font-regular text-base md:text-lg mt-6 mb-6 font-outfit font-normal">
-              Nature's Edge Wildlife and Reptile Rescue, is a non-profit
+              Nature's Edge Wildlife and Reptile Rescue, is a nonprofit
               dedicated to rehabilitating injured wildlife and providing a safe
               haven for unwanted exotic reptiles. Our mission is to restore
               native species to health, educate the community, and help every
