@@ -1,10 +1,6 @@
 # Team 8 - Amdahl's Law
 # 2024 Opportunity Hack @ASU Winners
 
-## MOST UPDATED REPO(S)
-- [Backend repo](https://github.com/newrr-ohack/Animal-Rescue-OSS/Backend)
-- [Frontend repo](https://github.com/newrr-ohack/Animal-Rescue-OSS/Frontend)
-
 ## Quick Links
 - [Hackathon Details](https://www.ohack.dev/hack/2024_fall)
 - [Team Slack Channel](https://opportunity-hack.slack.com/app_redirect?channel=amdahls-law)
@@ -31,7 +27,7 @@ We chose to decrease complexity for administrative users at the nonprofit by usi
 - Frontend: Vite + React + Typescript + Tailwind
 - Backend: Typescript, Express.js
 - Database: MongoDB
-- Cloud Services: Railway and Vercel, a little AWS S3
+- Cloud Services: Fly.io, a little AWS S3
 - Authorization: Google Oauth
 <!-- Add/modify as needed -->
 
@@ -40,7 +36,7 @@ We chose to decrease complexity for administrative users at the nonprofit by usi
 Instructions on how to set up and run our project locally.
 
 ```bash
-git clone https://https://github.com/newrr-ohack/Animal-Rescue-OSS
+git clone https://github.com/opportunity-hack/animal-rescue-and-adoption
 cd Frontend
 pnpm install
 pnpm run dev
